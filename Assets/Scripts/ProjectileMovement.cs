@@ -18,6 +18,10 @@ public class ProjectileMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, rot + 90);
     }
 
+    protected void OnBecameInvisible() {
+        Destroy(this.gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Enemy")
