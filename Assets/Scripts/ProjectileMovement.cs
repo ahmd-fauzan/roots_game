@@ -18,7 +18,8 @@ public class ProjectileMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, rot + 90);
     }
 
-    protected void OnBecameInvisible() {
+    protected void OnBecameInvisible()
+    {
         Destroy(this.gameObject);
     }
 

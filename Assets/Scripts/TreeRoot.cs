@@ -11,6 +11,12 @@ public class TreeRoot : MonoBehaviour
 
     [SerializeField] private GameObject ammoPrefab;
 
+    public delegate void OnUpdateHealth(int health);
+    public static event OnUpdateHealth onUpdateHealth;
+
+    public delegate void OnUpdateResource(int resource);
+    public static event OnUpdateResource onUpdateResource;
+
     private float distance;
 
     GameManager gameManager;
@@ -23,6 +29,8 @@ public class TreeRoot : MonoBehaviour
         gameManager = GameManager.Instance;
 
         StartCoroutine(SpawnAmmoEnumerator());
+        onUpdateResource(resourceCount);
+        onUpdateHealth(treeHealth);
     }
 
     IEnumerator SpawnAmmoEnumerator()
@@ -62,10 +70,11 @@ public class TreeRoot : MonoBehaviour
         {
             case ResourceType.Good:
                 resourceCount++;
+                onUpdateResource(resourceCount);
                 break;
             case ResourceType.Bad:
                 treeHealth -= 10;
-
+                onUpdateHealth(treeHealth);
                 if (treeHealth <= 0)
                     Debug.Log("Game Over");
 
