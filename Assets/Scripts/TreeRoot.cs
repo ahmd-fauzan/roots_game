@@ -1,43 +1,90 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TreeRoot : MonoBehaviour
 {
-    [Header("Tree Stat")]
-    [SerializeField] private int treeHealth;
-    [SerializeField] private int resourceCount;
-    [SerializeField] private float timeBetweenSpawnAmmo;
+    [SerializeField] private TreeLevel[] treeLevels;
 
     [SerializeField] private GameObject ammoPrefab;
 
-    public delegate void OnUpdateHealth(int health);
-    public static event OnUpdateHealth onUpdateHealth;
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private Slider energySlider;
+    [SerializeField] private Image expImage;
 
-    public delegate void OnUpdateResource(int resource);
-    public static event OnUpdateResource onUpdateResource;
+    [SerializeField] float attackRange;
 
     private float distance;
 
+    private TreeLevel currLevel;
+
+    private int currLevelIndex;
+
     GameManager gameManager;
+
+    Coroutine attackCoroutine;
 
     private void Start()
     {
+        currLevelIndex = 0;
+
+        currLevel = Instantiate(treeLevels[currLevelIndex]);
+
+        currLevel.Initialize();
+
+        currLevel.OnLevelUpgrade += Upgrade;
+        currLevel.OnTreeDeath += Death;
+
+        healthSlider.maxValue = currLevel.Health;
+        healthSlider.value = currLevel.GetCurrentHealth();
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         distance = Vector3.Distance(transform.position, player.transform.position);
 
         gameManager = GameManager.Instance;
 
         StartCoroutine(SpawnAmmoEnumerator());
-        onUpdateResource(resourceCount);
-        onUpdateHealth(treeHealth);
+    }
+
+    private void Upgrade()
+    {
+        currLevel.OnLevelUpgrade -= Upgrade;
+        currLevel.OnTreeDeath -= Death;
+
+        if (currLevel.ResourceNeed == 0) return;
+
+        currLevelIndex++;
+
+        currLevel = Instantiate(treeLevels[currLevelIndex]);
+
+        currLevel.Initialize();
+
+        if (currLevel.CanAttack)
+        {
+            if (attackCoroutine != null)
+                StopCoroutine(attackCoroutine);
+
+            attackCoroutine = StartCoroutine(TreeAttack());
+        }
+
+        healthSlider.maxValue = currLevel.Health;
+        healthSlider.value = currLevel.GetCurrentHealth();
+
+        currLevel.OnLevelUpgrade += Upgrade;
+        currLevel.OnTreeDeath += Death;
+    }
+
+    private void Death()
+    {
+
     }
 
     IEnumerator SpawnAmmoEnumerator()
     {
         while (gameManager.GameState)
         {
-            yield return new WaitForSeconds(timeBetweenSpawnAmmo);
+            yield return new WaitForSeconds(currLevel.TimeSpawnFruit);
 
             SpawnAmmo();
         }
@@ -47,13 +94,6 @@ public class TreeRoot : MonoBehaviour
     {
 
         Vector3 spawnPos = RandomPointOnXZCircle(transform.position, distance);
-
-        /*
-        if (Vector3.Distance(transform.position, spawnPos + transform.position) <= distance)
-        {
-            SpawnAmmo();
-            return;
-        }*/
 
         Instantiate(ammoPrefab, transform.position + spawnPos, Quaternion.identity);
     }
@@ -69,17 +109,62 @@ public class TreeRoot : MonoBehaviour
         switch (resourceType)
         {
             case ResourceType.Good:
-                resourceCount++;
-                onUpdateResource(resourceCount);
+                currLevel.AddResource();
                 break;
             case ResourceType.Bad:
-                treeHealth -= 10;
-                onUpdateHealth(treeHealth);
-                if (treeHealth <= 0)
-                    Debug.Log("Game Over");
-
+                currLevel.TakeDamage();
                 break;
         }
+    }
+
+    private IEnumerator TreeAttack()
+    {
+        while (gameManager.GameState)
+        {
+            yield return new WaitForSeconds(currLevel.ColdownAttack);
+
+            while (FindBedEnemy().Count == 0)
+                yield return null;
+
+            foreach(GameObject go in FindBedEnemy())
+            {
+                GameObject projectile = Instantiate(ammoPrefab, transform.position, Quaternion.identity);
+
+                projectile.GetComponent<ProjectileMovement>().Shoot(go.transform.position);
+            }
+        }
+    }
+
+
+
+    private List<GameObject> FindBedEnemy()
+    {
+        List<GameObject> enemyList = new List<GameObject>();
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject go in enemies)
+        {
+            if (enemyList.Count > currLevel.NumberOfAttack)
+                break;
+
+            if (Vector3.Distance(transform.position, go.transform.position) < attackRange)
+            {
+                EnemyMovement enemy = go.GetComponent<EnemyMovement>();
+
+                if (enemy.resourceType == ResourceType.Bad)
+                    enemyList.Add(go);
+            }
+
+        }
+
+        return enemyList;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
 

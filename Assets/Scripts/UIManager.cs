@@ -9,16 +9,16 @@ public class UIManager : MonoBehaviour
 
     void OnEnable()
     {
-        TreeRoot.onUpdateHealth += UpdateTreeHealthView;
-        TreeRoot.onUpdateResource += UpdateResourceView;
-        PlayerShooting.onUpdateAmmo += UpdateAmmoView;
+        //TreeRoot.onUpdateHealth += UpdateTreeHealthView;
+        //TreeRoot.onUpdateResource += UpdateResourceView;
+        //PlayerShooting.onUpdateAmmo += UpdateAmmoView;
     }
 
     void OnDisable()
     {
-        TreeRoot.onUpdateHealth -= UpdateTreeHealthView;
-        TreeRoot.onUpdateResource -= UpdateResourceView;
-        PlayerShooting.onUpdateAmmo -= UpdateAmmoView;
+        //TreeRoot.onUpdateHealth -= UpdateTreeHealthView;
+        //TreeRoot.onUpdateResource -= UpdateResourceView;
+        //PlayerShooting.onUpdateAmmo -= UpdateAmmoView;
     }
 
     void Start()

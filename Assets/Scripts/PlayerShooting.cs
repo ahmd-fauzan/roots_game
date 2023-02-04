@@ -9,17 +9,16 @@ public class PlayerShooting : MonoBehaviour
 
     [SerializeField] LayerMask shootMask;
 
+    PlayerAnimation playerAnimation;
+
     [Header("WeaponStat")]
     [SerializeField] private int weaponAmmo;
 
     InputHandler inputHandler;
 
-    public delegate void OnUpdateAmmo(int ammo);
-    public static event OnUpdateAmmo onUpdateAmmo;
-
-    void Start()
+    private void Start()
     {
-        onUpdateAmmo(weaponAmmo);
+        playerAnimation = PlayerAnimation.Instance;
     }
 
     private void OnEnable()
@@ -37,7 +36,9 @@ public class PlayerShooting : MonoBehaviour
 
     private void Shoot(Vector2 mousePosition)
     {
-        //if (weaponAmmo <= 0) return;
+        if (weaponAmmo <= 0) return;
+
+        if (!playerAnimation.canWalk) return;
 
         Vector3 mousePosOnScreen = Camera.main.ScreenToWorldPoint(mousePosition);
 
@@ -47,18 +48,29 @@ public class PlayerShooting : MonoBehaviour
             if (hit.collider.tag == "Root")
                 return;
 
+        playerAnimation.StartShootAnimation();
+
+        StartCoroutine(StartShoot(mousePosOnScreen));
+        
+    }
+
+    private IEnumerator StartShoot(Vector2 direction)
+    {
+        while (!playerAnimation.isShoot)
+            yield return null;
+
         GameObject go = Instantiate(ammoPrefab, spawnProjectile.position, Quaternion.identity);
 
-        go.GetComponent<ProjectileMovement>().Shoot(mousePosOnScreen);
+        go.GetComponent<ProjectileMovement>().Shoot(direction);
 
         weaponAmmo--;
-        onUpdateAmmo(weaponAmmo);
+        //onUpdateAmmo(weaponAmmo);
     }
 
     void AddAmmo(int ammoCount)
     {
         weaponAmmo += ammoCount;
-        onUpdateAmmo(weaponAmmo);
+        //onUpdateAmmo(weaponAmmo);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

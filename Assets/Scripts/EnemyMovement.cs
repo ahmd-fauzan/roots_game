@@ -6,7 +6,7 @@ public class EnemyMovement : MonoBehaviour, IDamageable
 {
     [SerializeField] float speed;
 
-    [SerializeField] ResourceType resourceType;
+    [SerializeField] public ResourceType resourceType;
 
     Vector3 target;
 
