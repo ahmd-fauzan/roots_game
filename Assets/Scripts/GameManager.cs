@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     [SerializeField] Transform spawnPoints;
 
@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeBetweenSpawn;
 
     private bool gameRun;
+
+    public bool GameState => gameRun;
 
     // Start is called before the first frame update
     void Start()

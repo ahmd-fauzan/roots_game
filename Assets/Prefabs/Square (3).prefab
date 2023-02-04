@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2587971652320029171}
   m_Layer: 0
   m_Name: Square (3)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b266fc0658735408db86e86c9d0c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   speed: 4
 --- !u!61 &2587971652320029168
 BoxCollider2D:

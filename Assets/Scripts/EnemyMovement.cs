@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : MonoBehaviour, IDamageable
 {
     [SerializeField] float speed;
+
+    [SerializeField] ResourceType resourceType;
 
     Vector3 target;
 
@@ -24,7 +26,14 @@ public class EnemyMovement : MonoBehaviour
     {
         if(collision.collider.tag == "Root")
         {
+            collision.collider.GetComponent<TreeRoot>().TakeResource(resourceType);
+
             Destroy(this.gameObject);
         }
+    }
+
+    public void TakeDamage()
+    {
+        Destroy(this.gameObject);
     }
 }
