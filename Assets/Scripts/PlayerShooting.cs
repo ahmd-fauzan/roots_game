@@ -14,6 +14,14 @@ public class PlayerShooting : MonoBehaviour
 
     InputHandler inputHandler;
 
+    public delegate void OnUpdateAmmo(int ammo);
+    public static event OnUpdateAmmo onUpdateAmmo;
+
+    void Start()
+    {
+        onUpdateAmmo(weaponAmmo);
+    }
+
     private void OnEnable()
     {
         if (inputHandler == null)
@@ -44,11 +52,13 @@ public class PlayerShooting : MonoBehaviour
         go.GetComponent<ProjectileMovement>().Shoot(mousePosOnScreen);
 
         weaponAmmo--;
+        onUpdateAmmo(weaponAmmo);
     }
 
     void AddAmmo(int ammoCount)
     {
         weaponAmmo += ammoCount;
+        onUpdateAmmo(weaponAmmo);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
