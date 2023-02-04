@@ -26,8 +26,7 @@ public class InputHandler : Singleton<InputHandler>
     {
         Vector2 direction = playerInput.actions["Movement"].ReadValue<Vector2>();
 
-        if (direction != Vector2.zero)
-            OnMovementPressed?.Invoke(direction.x);
+        OnMovementPressed?.Invoke(direction.x);
 
         Vector2 mousePosition = playerInput.actions["MousePosition"].ReadValue<Vector2>();
 

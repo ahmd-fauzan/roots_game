@@ -46,7 +46,7 @@ public class TreeLevel : ScriptableObject
 
     public float GetProgressResource()
     {
-        return currResource / ResourceNeed;
+        return (float)currResource / (float)ResourceNeed;
     }
 
     public int GetCurrentHealth()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TreeRoot : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class TreeRoot : MonoBehaviour
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider energySlider;
     [SerializeField] private Image expImage;
+    [SerializeField] private TextMeshProUGUI levelText;
 
     [SerializeField] float attackRange;
 
@@ -59,6 +61,9 @@ public class TreeRoot : MonoBehaviour
         currLevel = Instantiate(treeLevels[currLevelIndex]);
 
         currLevel.Initialize();
+
+        if (currLevel.ResourceNeed == 0) levelText.text = "MAX";
+        else levelText.text = (currLevelIndex + 1).ToString();
 
         if (currLevel.CanAttack)
         {
@@ -110,9 +115,11 @@ public class TreeRoot : MonoBehaviour
         {
             case ResourceType.Good:
                 currLevel.AddResource();
+                expImage.fillAmount = currLevel.GetProgressResource();
                 break;
             case ResourceType.Bad:
                 currLevel.TakeDamage();
+                healthSlider.value = currLevel.GetCurrentHealth();
                 break;
         }
     }
