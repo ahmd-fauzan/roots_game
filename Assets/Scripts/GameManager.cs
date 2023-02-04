@@ -10,9 +10,17 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private float timeBetweenSpawn;
 
+    [SerializeField] GameObject background;
+    [SerializeField] GameObject foreGround;
+
     private bool gameRun;
 
     public bool GameState => gameRun;
+
+    private void Awake()
+    {
+        InitializeResolution();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +40,22 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    private void InitializeResolution()
+    {
+        float camHalfHeight = Camera.main.orthographicSize;
+        float camHalfWidth = Camera.main.aspect * camHalfHeight;
+
+        // Set a new vector to the top left of the scene 
+        Vector3 topLeftPosition = new Vector3(-camHalfWidth, camHalfHeight, 0) + Camera.main.transform.position;
+        Vector3 topRightPosition = new Vector3(camHalfWidth, camHalfHeight, 0) + Camera.main.transform.position;
+        Vector3 bottomLeftPosition = new Vector3(-camHalfWidth, -camHalfHeight, 0) + Camera.main.transform.position;
+
+        float horizontal = Vector2.Distance(topLeftPosition, topRightPosition);
+        float vertical = Vector2.Distance(topLeftPosition, bottomLeftPosition);
+
+        background.transform.localScale = new Vector3(horizontal, vertical, 1);
+        foreGround.transform.localScale = new Vector3(horizontal, vertical, 1);
+    }
     private void Spawn()
     {
         int spawnIndex = Random.Range(0, spawnPoints.childCount);
