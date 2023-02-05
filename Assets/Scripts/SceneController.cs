@@ -17,16 +17,25 @@ public class SceneController : MonoBehaviour
 
     public GameObject targetPanel;
     public Toggle windowedToggle;
+    public Slider musicVolSlider;
 
     void Start()
     {
         _isOpenPanel = false;
         ClosePanel();
+        AudioController.Instance.SetVolume(1);
 
         if (windowedToggle != null)
         {
             windowedToggle.onValueChanged.AddListener(delegate {
                 OnToggleWindowed(windowedToggle);
+            });
+        }
+
+        if (musicVolSlider != null)
+        {
+            musicVolSlider.onValueChanged.AddListener(delegate {
+                OnVolumeUpdate(musicVolSlider);
             });
         }
     }
@@ -67,6 +76,12 @@ public class SceneController : MonoBehaviour
     public void OnToggleWindowed(Toggle change)
     {
         Screen.fullScreen = !windowedToggle.isOn;
+    }
+
+    public void OnVolumeUpdate(Slider change)
+    {
+        AudioController.Instance.SetVolume(change.value);
+        print("Vol:" + change.value);
     }
 
     public void OpenConfirmExit()
