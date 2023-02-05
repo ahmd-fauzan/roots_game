@@ -2202,9 +2202,29 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2352372851638484532, guid: a20ccc9efba5eb74fbe014c12aba69b5, type: 3}
+      propertyPath: _bgm
+      value: 
+      objectReference: {fileID: 8300000, guid: 53d69995237f83349a72a89b2b38bc83, type: 3}
+    - target: {fileID: 2352372851638484532, guid: a20ccc9efba5eb74fbe014c12aba69b5, type: 3}
+      propertyPath: _hitSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 18b746390120c7945b9bb770112fc862, type: 3}
+    - target: {fileID: 2352372851638484532, guid: a20ccc9efba5eb74fbe014c12aba69b5, type: 3}
       propertyPath: clickSFX
       value: 
       objectReference: {fileID: 8300000, guid: 149a206151824ab45b3030c375adfb11, type: 3}
+    - target: {fileID: 2352372851638484532, guid: a20ccc9efba5eb74fbe014c12aba69b5, type: 3}
+      propertyPath: _clickSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 149a206151824ab45b3030c375adfb11, type: 3}
+    - target: {fileID: 2352372851638484532, guid: a20ccc9efba5eb74fbe014c12aba69b5, type: 3}
+      propertyPath: _shootSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 699f40caadf829c479ee8745a8088807, type: 3}
+    - target: {fileID: 2352372851638484532, guid: a20ccc9efba5eb74fbe014c12aba69b5, type: 3}
+      propertyPath: _pickupSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 6379910b3e5d77747b736236572bd7e9, type: 3}
     - target: {fileID: 2352372851638484533, guid: a20ccc9efba5eb74fbe014c12aba69b5, type: 3}
       propertyPath: m_Name
       value: AudioController

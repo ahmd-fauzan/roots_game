@@ -25,13 +25,13 @@ public class ProjectileMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        if (collision.tag == "Enemy")
         {
-            if(collision.TryGetComponent(out IDamageable damageable))
+            if (collision.TryGetComponent(out IDamageable damageable))
             {
                 damageable.TakeDamage();
                 Destroy(this.gameObject);
-
+                AudioController.Instance.HitSFX();
             }
         }
     }
