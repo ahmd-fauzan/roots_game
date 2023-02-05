@@ -18,6 +18,9 @@ public class AudioController : SingletonPersistent<AudioController>
 
     public void SetVolume(float vol)
     {
-        _audioSource.volume = vol;
+        if (_audioSource != null)
+        {
+            _audioSource.volume = vol;
+        }
     }
 }
