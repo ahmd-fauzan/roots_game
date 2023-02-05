@@ -30,12 +30,16 @@ public class GameManager : Singleton<GameManager>
     {
         InitializeResolution();
 
-        gameRun = true;
+        gameRun = PlayerPrefs.GetInt("Tutorial") != 0;
+
+        if (gameRun)
+            StartGameplay();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartGameplay()
     {
+        gameRun = true;
+
         currWaveIndex = 0;
         currWave = Instantiate(waves[currWaveIndex]);
         waveText.text = "Wave " + (currWaveIndex + 1);

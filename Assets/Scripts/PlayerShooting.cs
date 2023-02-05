@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] GameObject ammoPrefab;
     [SerializeField] Transform spawnProjectile;
+
+    [SerializeField] TextMeshProUGUI ammoText;
 
     [SerializeField] LayerMask shootMask;
 
@@ -19,6 +22,8 @@ public class PlayerShooting : MonoBehaviour
     private void Start()
     {
         playerAnimation = PlayerAnimation.Instance;
+
+        UpdateAmmo(10);
     }
 
     private void OnEnable()
@@ -67,14 +72,13 @@ public class PlayerShooting : MonoBehaviour
 
         go.GetComponent<ProjectileMovement>().Shoot(direction);
 
-        weaponAmmo--;
-        //onUpdateAmmo(weaponAmmo);
+        UpdateAmmo(-1);
     }
 
-    void AddAmmo(int ammoCount)
+    void UpdateAmmo(int ammoCount)
     {
         weaponAmmo += ammoCount;
-        //onUpdateAmmo(weaponAmmo);
+        ammoText.text = "Ammo : " + weaponAmmo;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -83,7 +87,7 @@ public class PlayerShooting : MonoBehaviour
         {
             if(collision.TryGetComponent(out Ammo ammo))
             {
-                AddAmmo(ammo.GetAmmo());
+                UpdateAmmo(ammo.GetAmmo());
 
                 Destroy(collision.gameObject);
             }
