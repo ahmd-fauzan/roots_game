@@ -883,8 +883,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press A or Left Arrow to Move Left
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0b4803a3448fb40468212a6f12d00f08, type: 2}
+  m_sharedMaterial: {fileID: 431425856329539010, guid: 0b4803a3448fb40468212a6f12d00f08, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1129,6 +1129,10 @@ PrefabInstance:
     - target: {fileID: 1537234196012441448, guid: 60484e5970d334742a40235aae513921, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537234196069031624, guid: 60484e5970d334742a40235aae513921, type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1537234196113276581, guid: 60484e5970d334742a40235aae513921, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3330,6 +3334,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -1.8400269, y: 1}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1086752541 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1537234196069031624, guid: 60484e5970d334742a40235aae513921, type: 3}
+  m_PrefabInstance: {fileID: 337868697}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1097688018
 GameObject:
   m_ObjectHideFlags: 0
@@ -3963,8 +3978,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Wave 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0b4803a3448fb40468212a6f12d00f08, type: 2}
+  m_sharedMaterial: {fileID: 431425856329539010, guid: 0b4803a3448fb40468212a6f12d00f08, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4211,8 +4226,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Ammo : 10'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0b4803a3448fb40468212a6f12d00f08, type: 2}
+  m_sharedMaterial: {fileID: 431425856329539010, guid: 0b4803a3448fb40468212a6f12d00f08, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4983,6 +4998,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1075580471261163287, guid: 7a6b17d1603c9b1498f6316cbeea25f0, type: 3}
+      propertyPath: musicVolSlider
+      value: 
+      objectReference: {fileID: 1086752541}
+    - target: {fileID: 1075580471261163287, guid: 7a6b17d1603c9b1498f6316cbeea25f0, type: 3}
+      propertyPath: windowedToggle
+      value: 
+      objectReference: {fileID: 1834656421}
     - target: {fileID: 3706356711242332693, guid: 7a6b17d1603c9b1498f6316cbeea25f0, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -5441,6 +5464,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1824204831}
   m_CullTransparentMesh: 1
+--- !u!114 &1834656421 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1537234196165517813, guid: 60484e5970d334742a40235aae513921, type: 3}
+  m_PrefabInstance: {fileID: 337868697}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1842133082
 GameObject:
   m_ObjectHideFlags: 0
