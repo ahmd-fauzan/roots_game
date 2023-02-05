@@ -29,7 +29,7 @@ public class TreeRoot : MonoBehaviour
 
     Coroutine attackCoroutine;
 
-    private void Start()
+    public void Initialize()
     {
         currLevelIndex = 0;
 

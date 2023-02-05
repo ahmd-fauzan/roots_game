@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   health: 10
-  timeSpawnFruit: 4
+  timeSpawnFruit: 6
   canAttack: 0
   coldownAttack: 0
   numberOfAttack: 0

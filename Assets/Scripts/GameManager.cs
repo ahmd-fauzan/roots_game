@@ -6,6 +6,8 @@ using TMPro;
 [DefaultExecutionOrder(-1)]
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] TreeRoot treeRoot;
+
     [SerializeField] Transform spawnPoints;
 
     [SerializeField] GameObject[] enemyPrefabs;
@@ -39,6 +41,8 @@ public class GameManager : Singleton<GameManager>
     public void StartGameplay()
     {
         gameRun = true;
+
+        treeRoot.Initialize();
 
         currWaveIndex = 0;
         currWave = Instantiate(waves[currWaveIndex]);
