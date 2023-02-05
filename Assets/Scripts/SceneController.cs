@@ -23,13 +23,13 @@ public class SceneController : MonoBehaviour
     {
         _isOpenPanel = false;
         ClosePanel();
-        AudioController.Instance.SetVolume(1);
 
         if (windowedToggle != null)
         {
             windowedToggle.onValueChanged.AddListener(delegate {
                 OnToggleWindowed(windowedToggle);
             });
+            windowedToggle.isOn = !Screen.fullScreen;
         }
 
         if (musicVolSlider != null)
@@ -37,6 +37,7 @@ public class SceneController : MonoBehaviour
             musicVolSlider.onValueChanged.AddListener(delegate {
                 OnVolumeUpdate(musicVolSlider);
             });
+            AudioController.Instance.SetVolume(1);
         }
     }
 
@@ -47,6 +48,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadNextScene()
     {
+        AudioController.Instance.ClickSFX();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

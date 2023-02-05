@@ -7,6 +7,7 @@ public class AudioController : SingletonPersistent<AudioController>
     private AudioSource _audioSource;
 
     public AudioClip bgm;
+    public AudioClip clickSFX;
 
     void Start()
     {
@@ -18,6 +19,17 @@ public class AudioController : SingletonPersistent<AudioController>
 
     public void SetVolume(float vol)
     {
-        _audioSource.volume = vol;
+        if (_audioSource != null)
+        {
+            _audioSource.volume = vol;
+        }
+    }
+
+    public void ClickSFX()
+    {
+        if (_audioSource != null)
+        {
+            _audioSource.PlayOneShot(clickSFX);
+        }
     }
 }
