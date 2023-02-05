@@ -8,7 +8,8 @@ public class TreeRoot : MonoBehaviour
 {
     [SerializeField] private TreeLevel[] treeLevels;
 
-    [SerializeField] private GameObject ammoPrefab;
+    [SerializeField] private GameObject fruitPrefab;
+    [SerializeField] private GameObject projectilePrefab;
 
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider energySlider;
@@ -19,6 +20,7 @@ public class TreeRoot : MonoBehaviour
 
     private float distance;
 
+    [SerializeField]
     private TreeLevel currLevel;
 
     private int currLevelIndex;
@@ -40,6 +42,9 @@ public class TreeRoot : MonoBehaviour
 
         healthSlider.maxValue = currLevel.Health;
         healthSlider.value = currLevel.GetCurrentHealth();
+        energySlider.gameObject.SetActive(currLevel.CanAttack);
+        energySlider.maxValue = currLevel.ColdownAttack;
+        energySlider.value = 0;
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         distance = Vector3.Distance(transform.position, player.transform.position);
@@ -47,6 +52,14 @@ public class TreeRoot : MonoBehaviour
         gameManager = GameManager.Instance;
 
         StartCoroutine(SpawnAmmoEnumerator());
+
+        if (currLevel.CanAttack)
+        {
+            if (attackCoroutine != null)
+                StopCoroutine(attackCoroutine);
+
+            attackCoroutine = StartCoroutine(TreeAttack());
+        }
     }
 
     private void Upgrade()
@@ -75,6 +88,9 @@ public class TreeRoot : MonoBehaviour
 
         healthSlider.maxValue = currLevel.Health;
         healthSlider.value = currLevel.GetCurrentHealth();
+        energySlider.gameObject.SetActive(currLevel.CanAttack);
+        energySlider.maxValue = currLevel.ColdownAttack;
+        energySlider.value = 0;
 
         currLevel.OnLevelUpgrade += Upgrade;
         currLevel.OnTreeDeath += Death;
@@ -100,7 +116,7 @@ public class TreeRoot : MonoBehaviour
 
         Vector3 spawnPos = RandomPointOnXZCircle(transform.position, distance);
 
-        Instantiate(ammoPrefab, transform.position + spawnPos, Quaternion.identity);
+        Instantiate(fruitPrefab, transform.position + spawnPos, Quaternion.identity);
     }
 
     Vector3 RandomPointOnXZCircle(Vector3 center, float radius)
@@ -128,17 +144,27 @@ public class TreeRoot : MonoBehaviour
     {
         while (gameManager.GameState)
         {
-            yield return new WaitForSeconds(currLevel.ColdownAttack);
+            while (energySlider.value < energySlider.maxValue)
+            {
+                yield return new WaitForSeconds(1f);
+                energySlider.value++;
+            }
 
             while (FindBedEnemy().Count == 0)
                 yield return null;
 
+            Debug.Log("Bed Enemy : " + FindBedEnemy().Count);
+
             foreach(GameObject go in FindBedEnemy())
             {
-                GameObject projectile = Instantiate(ammoPrefab, transform.position, Quaternion.identity);
+                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
                 projectile.GetComponent<ProjectileMovement>().Shoot(go.transform.position);
+
+                yield return new WaitForSeconds(.5f);
             }
+
+            energySlider.value = 0;
         }
     }
 

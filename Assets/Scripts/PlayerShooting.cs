@@ -42,11 +42,15 @@ public class PlayerShooting : MonoBehaviour
 
         Vector3 mousePosOnScreen = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        RaycastHit2D hit = Physics2D.Raycast(spawnProjectile.position, transform.right, Mathf.Infinity);
+        RaycastHit2D hit = Physics2D.Raycast(spawnProjectile.position, transform.right, Mathf.Infinity, shootMask);
 
         if (hit.collider != null)
+        {
+            Debug.Log(hit.collider.name);
+
             if (hit.collider.tag == "Root")
                 return;
+        }
 
         playerAnimation.StartShootAnimation();
 

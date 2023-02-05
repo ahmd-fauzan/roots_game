@@ -243,14 +243,14 @@ RectTransform:
   m_Children:
   - {fileID: 421713648}
   - {fileID: 753727678}
-  m_Father: {fileID: 169938674}
+  m_Father: {fileID: 1064543148}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 11.3067, y: 21.399994}
-  m_SizeDelta: {x: 292.1792, y: 20}
-  m_Pivot: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0.932804, y: 0.5}
+  m_AnchoredPosition: {x: 32.143997, y: 0}
+  m_SizeDelta: {x: -18.287998, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &64646301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,7 +453,7 @@ GameObject:
   - component: {fileID: 169938676}
   - component: {fileID: 169938675}
   m_Layer: 5
-  m_Name: TreeCanvas
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,9 +471,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 64646300}
-  - {fileID: 1257898764}
-  - {fileID: 217977586}
+  - {fileID: 1064543148}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -566,7 +564,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217977585}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -574,14 +572,14 @@ RectTransform:
   - {fileID: 125939340}
   - {fileID: 1097688019}
   - {fileID: 1789598924}
-  m_Father: {fileID: 169938674}
+  m_Father: {fileID: 1064543148}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -132.8, y: 2.7000122}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 21, y: -3.4}
   m_SizeDelta: {x: 45, y: 45}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &287154100
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +727,7 @@ GameObject:
   m_Component:
   - component: {fileID: 413774328}
   - component: {fileID: 413774329}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tree_idle_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1526,7 +1524,7 @@ MonoBehaviour:
   spawnProjectile: {fileID: 114666316}
   shootMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   weaponAmmo: 10
 --- !u!61 &739201148
 BoxCollider2D:
@@ -2082,6 +2080,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046602049}
   m_CullTransparentMesh: 1
+--- !u!1 &1064543147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1064543148}
+  m_Layer: 5
+  m_Name: Tree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1064543148
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064543147}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 64646300}
+  - {fileID: 1257898764}
+  - {fileID: 217977586}
+  m_Father: {fileID: 169938674}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.316, y: 0}
+  m_AnchorMax: {x: 0.68433195, y: 0.24522224}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -1.8400269, y: 1}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1097688018
 GameObject:
   m_ObjectHideFlags: 0
@@ -2117,7 +2154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.08, y: -0.25}
+  m_AnchoredPosition: {x: -0.08000183, y: -0.25}
   m_SizeDelta: {x: -3.19, y: -2.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1097688020
@@ -2251,14 +2288,14 @@ RectTransform:
   m_Children:
   - {fileID: 1824204832}
   - {fileID: 47319474}
-  m_Father: {fileID: 169938674}
+  m_Father: {fileID: 1064543148}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 11.3067, y: 11.5}
-  m_SizeDelta: {x: 283.2903, y: 11.4}
-  m_Pivot: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 10.808, y: -13.6}
+  m_SizeDelta: {x: -60.96, y: 11.4}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1257898765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2818,7 +2855,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.12999916, y: 0.89}
+  m_AnchoredPosition: {x: -0.12999725, y: 0.8899994}
   m_SizeDelta: {x: -14.89, y: -19.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1789598925
@@ -3067,7 +3104,7 @@ GameObject:
   - component: {fileID: 1842133084}
   - component: {fileID: 1842133085}
   - component: {fileID: 1842133086}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tree
   m_TagString: Root
   m_Icon: {fileID: 0}
@@ -3105,7 +3142,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.64430857
+  m_Radius: 0.53
 --- !u!114 &1842133086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3124,12 +3161,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ebf35c622050151468e3a5bdf5bbbc3d, type: 2}
   - {fileID: 11400000, guid: ddc20335ae5275444b02df637bec8c40, type: 2}
   - {fileID: 11400000, guid: 9fe9a93ca48b49842ba225feefd9f8f7, type: 2}
-  ammoPrefab: {fileID: 1007860545733652173, guid: 4a18edccc70cd4c418ce6b56ab1d8453, type: 3}
+  fruitPrefab: {fileID: 1007860545733652173, guid: 4a18edccc70cd4c418ce6b56ab1d8453, type: 3}
+  projectilePrefab: {fileID: 8169479070929537471, guid: f9e930ca46277ab43b59c2a90f00b357, type: 3}
   healthSlider: {fileID: 64646301}
   energySlider: {fileID: 1257898765}
   expImage: {fileID: 1097688020}
   levelText: {fileID: 1789598925}
   attackRange: 4
+  currLevel: {fileID: 0}
 --- !u!1 &1871132572
 GameObject:
   m_ObjectHideFlags: 0
