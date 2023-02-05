@@ -45,6 +45,6 @@ public class LoreManager : MonoBehaviour
             yield return new WaitForSeconds(.5f);
         }
 
-        SceneManager.LoadScene("TitleScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
