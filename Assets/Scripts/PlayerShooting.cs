@@ -73,6 +73,7 @@ public class PlayerShooting : MonoBehaviour
         go.GetComponent<ProjectileMovement>().Shoot(direction);
 
         UpdateAmmo(-1);
+        AudioController.Instance.ShootSFX();
     }
 
     void UpdateAmmo(int ammoCount)
@@ -90,6 +91,7 @@ public class PlayerShooting : MonoBehaviour
                 UpdateAmmo(ammo.GetAmmo());
 
                 Destroy(collision.gameObject);
+                AudioController.Instance.PickUpSFX();
             }
         }
     }
