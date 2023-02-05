@@ -48,6 +48,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadNextScene()
     {
+        AudioController.Instance.ClickSFX();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
