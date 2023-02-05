@@ -15,7 +15,6 @@ public class SceneController : MonoBehaviour
     private string _activePanel;
     private bool _isOpenPanel;
 
-    private GameObject _prevPanel;
     public GameObject targetPanel;
     public Toggle windowedToggle;
 
@@ -44,7 +43,7 @@ public class SceneController : MonoBehaviour
 
     public void GoToTitleScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     public void OpenCreditPanel()
@@ -56,6 +55,7 @@ public class SceneController : MonoBehaviour
     public void ClosePanel()
     {
         _activePanel = TitlePanelType.NONE;
+        if (targetPanel == null) return;
         targetPanel.SetActive(false);
         for (int i = 0; i < targetPanel.transform.childCount; i++)
         {
@@ -83,9 +83,18 @@ public class SceneController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (SceneManager.GetActiveScene().name == "SampleScene" || SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                GoToTitleScene();
+            }
+        }
+
         if (!_isOpenPanel) return;
         _isOpenPanel = false;
 
+        if (targetPanel == null) return;
         targetPanel.SetActive(true);
         var i = targetPanel.transform.childCount - 1;
         while (i >= 0)
@@ -94,7 +103,7 @@ public class SceneController : MonoBehaviour
             if (_activePanel == child.gameObject.name)
             {
                 child.gameObject.SetActive(true);
-                i = -1;
+                i = 0; // Is found
             }
             i -= 1;
         }
