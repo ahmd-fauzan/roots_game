@@ -16,9 +16,13 @@ public class TreeRoot : MonoBehaviour
     [SerializeField] private Image expImage;
     [SerializeField] private TextMeshProUGUI levelText;
 
+    [SerializeField] private int treeHealth;
+
     [SerializeField] float attackRange;
 
     private float distance;
+
+    private int currHealth;
 
     [SerializeField]
     private TreeLevel currLevel;
@@ -33,6 +37,8 @@ public class TreeRoot : MonoBehaviour
     {
         currLevelIndex = 0;
 
+        currHealth = treeHealth;
+
         currLevel = Instantiate(treeLevels[currLevelIndex]);
 
         currLevel.Initialize();
@@ -40,8 +46,8 @@ public class TreeRoot : MonoBehaviour
         currLevel.OnLevelUpgrade += Upgrade;
         currLevel.OnTreeDeath += Death;
 
-        healthSlider.maxValue = currLevel.Health;
-        healthSlider.value = currLevel.GetCurrentHealth();
+        healthSlider.maxValue = treeHealth;
+        healthSlider.value = currHealth;
         energySlider.gameObject.SetActive(currLevel.CanAttack);
         energySlider.maxValue = currLevel.ColdownAttack;
         energySlider.value = 0;
@@ -86,8 +92,6 @@ public class TreeRoot : MonoBehaviour
             attackCoroutine = StartCoroutine(TreeAttack());
         }
 
-        healthSlider.maxValue = currLevel.Health;
-        healthSlider.value = currLevel.GetCurrentHealth();
         energySlider.gameObject.SetActive(currLevel.CanAttack);
         energySlider.maxValue = currLevel.ColdownAttack;
         energySlider.value = 0;
@@ -134,8 +138,8 @@ public class TreeRoot : MonoBehaviour
                 expImage.fillAmount = currLevel.GetProgressResource();
                 break;
             case ResourceType.Bad:
-                currLevel.TakeDamage();
-                healthSlider.value = currLevel.GetCurrentHealth();
+                currHealth--;
+                healthSlider.value = currHealth;
                 break;
         }
     }

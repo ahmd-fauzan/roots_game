@@ -15,10 +15,14 @@ public class InputHandler : Singleton<InputHandler>
     public event MousePositionDelegate OnMousePosition;
     public event MousePressedDelegate OnMousePressed;
 
+    public bool canShoot;
+
     // Start is called before the first frame update
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+
+        canShoot = true;
     }
 
     // Update is called once per frame
@@ -32,7 +36,12 @@ public class InputHandler : Singleton<InputHandler>
 
         OnMousePosition?.Invoke(mousePosition);
 
-        if (playerInput.actions["Shoot"].triggered)
+        if (playerInput.actions["Shoot"].triggered && canShoot)
             OnMousePressed?.Invoke(mousePosition);
+    }
+
+    public void CantShoot(bool canShoot)
+    {
+        this.canShoot = canShoot;
     }
 }

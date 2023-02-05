@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(-1)]
 public class GameManager : Singleton<GameManager>
@@ -126,5 +127,27 @@ public class GameManager : Singleton<GameManager>
                 Spawn();
             }
         }
+    }
+    public void RestartGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    public void MainMenu()
+    {
+        Time.timeScale = 1;
+
+        SceneManager.LoadScene("TitleScene");
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 }
