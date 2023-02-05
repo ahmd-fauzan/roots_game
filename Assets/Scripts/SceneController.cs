@@ -81,7 +81,6 @@ public class SceneController : MonoBehaviour
     public void OnVolumeUpdate(Slider change)
     {
         AudioController.Instance.SetVolume(change.value);
-        print("Vol:" + change.value);
     }
 
     public void OpenConfirmExit()
